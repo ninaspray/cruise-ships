@@ -1,12 +1,11 @@
 class Ship {
-    constructor(startingPort, passengers) {
-        this.startingPort = "Dover",
-            this.passengers = 10
-
-    };
-    setSail() {
-
-    }
+  constructor(itinerary) {
+    this.itinerary = itinerary,
+    this.startingPort = this.startingPort
+  }
+  setSail(){
+  this.startingPort = 0;
+  };
 }
 
-module.exports = { Ship }
+module.exports = Ship;
