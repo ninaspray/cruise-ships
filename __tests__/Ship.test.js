@@ -1,32 +1,47 @@
 /* globals describe it expect */
 const Ship = require("../src/Ship")
 const Port = require("../src/Port")
+const Itinerary = require('../src/Itinerary')
 
-let ship, port;
+let ship, port, itinerary, hull, dover;
 
 beforeEach(() => {
-    ship = new Ship(port);
-    port = new Port("dover");
-    ship.startingPort = "dover";
+    dover = new Port ("dover");
     hull = new Port("hull");
+    port = new Port("dover");
+    itinerary = new Itinerary([port, dover, hull]);
+    ship = new Ship(itinerary);
 })
 
 
 describe("Ship", () => {
-    it("Can be insantiated", () => {
+
+    it("Can be instantiated", () => {
         expect(ship).toBeInstanceOf(Object);
     });
-    it("has a starting port", () => {
-        expect(ship.startingPort).toBe("dover");
-    });
+
+    it('has a starting port', () => {
+        expect(ship.currentPort).toBe(port);
+      });
+
     it("can set sail", () => {
-        ship.setSail();
-        expect(ship.startingPort).toBeFalsy();
+    ship.setSail();
+        expect(ship.currentPort).toBeFalsy();
+        expect(ship.previousPort).toBe(port);
     });
+
     it("can dock at a different port", () => {
         ship.setSail();
-        ship.dock("hull")
-        expect(ship.currentPort).toBe("hull");
+        ship.dock();
+        expect(ship.currentPort).toBe(dover);
+    });
+
+    it("can't set sail further than it's itinerary", () => {
+        ship.setSail();
+        ship.dock();
+        ship.setSail();
+        ship.dock();
+        expect(()=> ship.setSail()).toThrowError("Your cruise has now ended :(");
     });
 
 });

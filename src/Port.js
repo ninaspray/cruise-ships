@@ -1,6 +1,7 @@
 class Port {
-    constructor (name) {
+    constructor (name, itinerary ) {
         this.name = name;
+        itinerary = {ports:["dover", "hull"]};
     }
 }
 

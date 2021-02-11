@@ -1,4 +1,5 @@
 const Port = require("../src/Port")
+ 
 
 let port, name;
 
@@ -9,7 +10,7 @@ beforeEach(() => {
 
 describe("Port", () => {
     it("Can be insantiated", () => {
-        expect(port).toBeInstanceOf(Object);
+        expect(new Port(name)).toBeInstanceOf(Object);
     });
     it("The port has a name", () => {
         expect(port.name).toBe("dover");
