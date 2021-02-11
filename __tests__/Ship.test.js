@@ -28,12 +28,15 @@ describe("Ship", () => {
     ship.setSail();
         expect(ship.currentPort).toBeFalsy();
         expect(ship.previousPort).toBe(port);
+        expect(dover.ships).not.toContain(ship);
     });
 
     it("can dock at a different port", () => {
         ship.setSail();
         ship.dock();
         expect(ship.currentPort).toBe(dover);
+        expect(dover.ships).toContain(ship)
+        ship.setSail();
     });
 
     it("can't set sail further than it's itinerary", () => {
